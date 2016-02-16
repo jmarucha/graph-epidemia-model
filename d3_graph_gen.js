@@ -1,8 +1,16 @@
 "use strict";
 
+var coef = {
+die:0.1,
+res:0.2,
+inf:0.3
+};
+
+
+var nodes = [];
+
 var width = $(window).width(),
     height = $(window).height();
-
 
 var color = d3.scale.category10();
 
@@ -43,7 +51,7 @@ var svg = d3.select("body").append("svg")
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-      .attr("r", 8)
+      .attr("r", 9)
       .style("fill", function(d) { return color(d.group); })
 	  .attr('id', function(d){ return 'name' + d.index; })
       .call(force.drag);
@@ -67,6 +75,9 @@ var svg = d3.select("body").append("svg")
 		nodes[d.index]="ill";
 });
 
+	for(var i=0; i<NUM_OF_NODES; i++) {
+		nodes[i] = "ok";
+	}
 }
 
 var NUM_OF_NODES = 100;
@@ -76,11 +87,7 @@ f(false, society);
 // ok - healthy
 // ill - infected
 // dead - well...
-var nodes = [];
 
-for(var i=0; i<NUM_OF_NODES; i++) {
-  nodes[i] = "ok";
-}
 
 
 setInterval(function(){
@@ -98,21 +105,21 @@ setInterval(function(){
 		}
 	}
 	for (var i = 0; i < toDie.length; ++i) {
-		if (Math.random()<0.1) {
+		if (Math.random()<coef.die) {
 			//DIE
 			nodes[toDie[i]]="dead";
-			d3.select("#name" + toDie[i]).style({opacity: 0.1});
-		} else if (Math.random()<0.8) {
+			d3.select("#name" + toDie[i]).attr("class", "node-dead");
+		} else if (Math.random()<coef.res) {
 			//OR LIVE FOREVER
 			nodes[toDie[i]]="resurrected";
-			d3.select("#name" + toDie[i]).style({stroke: "#000"});
+			d3.select("#name" + toDie[i]).attr("class", "node-resurrected");
 		}
 	}
 	for (var i = 0; i < toInfect.length; ++i) {
-		if (Math.random()<0.9) {
+		if (Math.random()<coef.inf) {
 			//STRUGGLE
 			nodes[toInfect[i]]="ill";
-			d3.select("#name" + toInfect[i]).style({stroke: "#f00"});
+			d3.select("#name" + toInfect[i]).attr("class", "node-ill");
 		}
 	}
-}, 2000);
+}, 500);

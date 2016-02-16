@@ -1,7 +1,7 @@
 
 .node {
   stroke: #fff;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
 
 .node-ill {
@@ -9,14 +9,18 @@
   stroke-width: 2px;
 }
 
+.node-dead {
+  opacity: 0.1;
+}
+
+.node-resurrected {
+  stroke: #7d7;
+  stroke-width: 2px;
+}
 
 .link {
   stroke: #999;
   stroke-opacity: .6;
-}
-
-body {
-	padding: -10px;
 }
 
 svg {
@@ -24,14 +28,21 @@ svg {
 }
 
 .form {
-	position: absolute; padding: 2px 4px; left: 0px; top: 0px; z-index: 1; 	background-color: #BBB; font-family: sans-serif; opacity:1;
+	position: absolute; padding: 3px 5px; left: 0px; top: 0px; z-index: 1; 	background-color: #BBB; font-family: sans-serif; opacity:1; width: 120px;
+}
+.form div{
+	width: 100%;
+	position: relative;
+	height: 24px;
 }
 .form input {
 	opacity: 1;
 	width: 70px;
 	text-align: right;
+	position: absolute;
+	right: 0px;
+	top: 0px;
 }
-
-.dead-node {
-  opacity: 0.1;
+.form button {
+	width: 100%;
 }
